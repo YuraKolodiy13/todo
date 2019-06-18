@@ -1,8 +1,12 @@
 import React from 'react'
+import './Heading.scss'
 
 const Heading = () => {
   return (
-      <h1>My ToDo List</h1>
+      <div className='Heading d-flex'>
+        <h1>My ToDo List</h1>
+        <h2>more to do</h2>
+      </div>
   )
 };
 
