@@ -1,31 +1,55 @@
-import React from 'react'
+import React, {Component} from 'react'
 import TodoList from '../TodoList/TodoList'
 import Input from '../Input/Input'
 import Heading from '../Heading/Heading'
 import Filter from '../Filter/Filter'
 import './App.scss'
+import AddItem from '../AddItem/AddItem'
 
 
-const App = () => {
-  const isLogin = false;
-  const loginBox = <span>Log in</span>;
+class App extends Component {
 
-  const todoDate = [
-    {label: 'drink'},
-    {label: 'make'},
-    {label: 'learn'},
-    {label: 'yes'}
-  ];
+  state= {
+    todoDate: [
+      {label: 'drink'},
+      {label: 'make'},
+      {label: 'learn'},
+      {label: 'yes'}
+    ]
+  };
 
-  return (
+  onDeleted = (id) => {
+    this.setState((state) => {
+      const before = this.state.todoDate.slice(0, id);
+      const after = this.state.todoDate.slice(id+1);
+      return{
+        todoDate: [...before, ...after]
+      }
+    });
+  };
+
+  addItem = (text) => {
+    this.setState((state) => {
+      let newArr = this.state.todoDate.slice();
+      newArr.push({label: text});
+      return{
+        todoDate: newArr
+      }
+    })
+  }
+
+  render(){
+    return (
       <div>
-        {isLogin ? null : loginBox}
         <Heading/>
         <Input/>
         <Filter/>
-        <TodoList todos={todoDate} onDeleted={id => console.log(`deleted ${id}`)}/>
+        <TodoList todos={this.state.todoDate} onDeleted={this.onDeleted} />
+        <AddItem addItem={this.addItem} />
       </div>
-  )
-};
+    )
+}
+
+}
 
 export default App;
