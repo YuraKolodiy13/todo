@@ -11,7 +11,12 @@ const TodoList = (props) => {
             {/*label={item.label} */}
             {/*important={item.important}/>*/}
 
-          <TodoListItem {...item} onDeleted={() => props.onDeleted(index)} />
+          <TodoListItem
+              {...item}
+              onDeleted={() => props.onDeleted(index)}
+              onTogglePriority={() => props.onTogglePriority(index)}
+              onToggleDone={() => props.onToggleDone(index)}
+          />
         </li>
     )
   });

@@ -1,5 +1,6 @@
 .TodoListItem{
   font-size: 1.25rem;
+  cursor: pointer;
   button{
     width: 35px;
     margin: 3px;
@@ -9,5 +10,15 @@
   }
   &.priority{
     font-weight: bold;
+  }
+}
+//.btnWrap{
+//  margin-left: auto;
+//}
+.itemWrap{
+  display: flex;
+  justify-content: space-between;
+  button:last-of-type{
+    margin-left: 10px;
   }
 }

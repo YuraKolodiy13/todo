@@ -7,49 +7,29 @@ class TodoListItem extends Component{
   //   console.log(this.props.label)
   // };
 
-  state = {
-    done: false,
-    priority: false
-  };
-
-  onLabelClick = () => {
-    this.setState(state => {
-      return{
-        done: !this.state.done
-      }
-    })
-  };
-
-  onPriorityClick = () => {
-    this.setState( state => {
-      return{
-        priority: !this.state.priority
-      }
-    })
-  };
-
-
 
   render(){
 
     const cls = ['TodoListItem'];
-    if(this.state.done){
+    if(this.props.done){
       cls.push('done');
     }
-    if(this.state.priority){
+    if(this.props.priority){
       cls.push('priority');
     }
 
     return (
-      <span>
-        <span className={cls.join(' ')} onClick={this.onLabelClick}>{this.props.label}</span>
-        <button className='btn btn-outline-success btn-sm' onClick={this.onPriorityClick}>
-          <i className='fa fa-exclamation'/>
-        </button>
-        <button className='btn btn-outline-danger btn-sm' onClick={this.props.onDeleted}>
-          <i className='fa fa-trash-o'/>
-        </button>
-      </span>
+      <div className='itemWrap'>
+        <span className={cls.join(' ')} onClick={this.props.onToggleDone}>{this.props.label}</span>
+        <span className="btnWrap">
+          <button className='btn btn-outline-success btn-sm' onClick={this.props.onTogglePriority}>
+            <i className='fa fa-exclamation'/>
+          </button>
+          <button className='btn btn-outline-danger btn-sm' onClick={this.props.onDeleted}>
+            <i className='fa fa-trash-o'/>
+          </button>
+        </span>
+      </div>
     )
   }
 }
