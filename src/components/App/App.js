@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import TodoList from '../TodoList/TodoList'
-import Input from '../Input/Input'
+import Search from '../Search/Search'
 import Heading from '../Heading/Heading'
 import Filter from '../Filter/Filter'
 import './App.scss'
@@ -33,6 +33,7 @@ class App extends Component {
         todoDate: [...before, ...after]
       }
     });
+    this.initialTodoDate = [...this.initialTodoDate.slice(0, id), ...this.initialTodoDate.slice(id+1)]
   };
 
   addItem = (text) => {
@@ -44,7 +45,8 @@ class App extends Component {
       return{
         todoDate: newArr
       }
-    })
+    });
+    this.initialTodoDate = [...this.initialTodoDate, newItem]
   };
 
   toggleProperty(arr, id, prop){
@@ -68,6 +70,18 @@ class App extends Component {
     });
   };
 
+  initialTodoDate = [...this.state.todoDate];
+  onSearch = (e) => {
+    this.setState({
+      todoDate: this.state.todoDate.filter(el => el.label.toLocaleLowerCase().indexOf(e.target.value.toLocaleLowerCase()) > -1)
+    });
+    if (e.target.value === ''){
+      this.setState({
+        todoDate: this.initialTodoDate
+      });
+    }
+  };
+
   render(){
     return (
       <div>
@@ -75,8 +89,8 @@ class App extends Component {
             toDo={this.state.todoDate.filter(el => !el.done).length}
             done={this.state.todoDate.length - this.state.todoDate.filter(el => !el.done).length}
         />
-        <Input/>
-        <Filter/>
+        <Search onSearch={this.onSearch}/>
+        <Filter todos={this.state.todoDate}/>
         <TodoList
             todos={this.state.todoDate}
             onDeleted={this.onDeleted}

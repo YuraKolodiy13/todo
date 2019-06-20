@@ -1,3 +1,7 @@
 .Filter{
-
+  .btn:hover,
+  .active{
+    background-color: green!important;
+    border-color: green!important;
+  }
 }
